@@ -68,11 +68,13 @@ var fight = function (enemyName) {
 };
 //function to start new game
 var startGame = function () {
+    console.log("start function running")
     playerHealth = 100;
     playerAttack = 10;
     playerMoney = 10;
 
     for (var i = 0; i < enemyNames.length; i++) {
+        console.log("inside for loop")
         if (playerHealth > 0) {
             window.alert("Welcome to Robot Gladiators! Round " + (i + 1));
             var pickedEnemyName = enemyNames[i]
@@ -105,6 +107,7 @@ var endGame = function () {
     else {
         window.alert("Thank you for playing Robot Gladiators! Come back soon!");
     }
-    PAUSE
+
 }
 
+startGame();
