@@ -74,12 +74,21 @@ var startGame = function () {
     playerMoney = 10;
 
     for (var i = 0; i < enemyNames.length; i++) {
-        console.log("inside for loop")
         if (playerHealth > 0) {
             window.alert("Welcome to Robot Gladiators! Round " + (i + 1));
             var pickedEnemyName = enemyNames[i]
             enemyHealth = 50;
             fight(pickedEnemyName);
+
+            //if there a more enemeies
+            if (playerHealth > 0 && i < enemyNames.length - 1) {
+                //ask if user wants to shop
+                var storeConfirm = window.confirm("the fight is over, visit the store before the next round?");
+                //if yes
+                if (storeConfirm) {
+                shop();
+                }
+            }
         }
         else {
             window.alert("You have lost your robot in battle! Game Over!");
@@ -108,6 +117,55 @@ var endGame = function () {
         window.alert("Thank you for playing Robot Gladiators! Come back soon!");
     }
 
+}
+
+var shop = function() {
+    //ask player what they want to do
+    var shopOptionPrompt = window.prompt(
+        "Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please enter one: 'REFILL', 'UPGRADE', or 'LEAVE' to make a choice."
+    );
+
+    //Switch to carry out action (the shop)
+    switch (shopOptionPrompt) {
+        case "refill":
+        case "REFILL":
+            if (playerMoney >= 7) {
+            window.alert("Refilling player's health by 20 for 7 dollars.");
+            
+            //increase health and decrease money
+            playerHealth = playerHealth + 20;
+            playerMoney = playerMoney - 7;
+            }
+            else {
+                window.alert("Your wallet is dry! Get your broke self out there!");
+            }
+
+            break;
+        case "upgrade":
+        case "UPGRADE":
+            if (playerMoney >= 7) {
+            window.alert("Upgrading player's attack by 6 for 7 dollars.");
+
+            //increase attack and decrease money
+            playerAttack = playerAttack + 6;
+            playerMoney = playerMoney - 7;
+            }
+            else {
+                window.alert("Your wallet is dry! Get your broke self out there!");
+            }
+
+            break;
+        case "leave":
+        case "LEAVE":
+            window.alert("Leaving the store.");
+            break;
+        default:
+            window.alert("You did not pick a valid option. Try again.");
+
+            //call shop again to force player to pick a valid option
+            shop();
+            break;
+    }
 }
 
 startGame();
